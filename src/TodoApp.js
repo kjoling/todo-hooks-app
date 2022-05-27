@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import TodoList from "./TodoList";
 import { styled } from "@mui/material/styles";
 import { Paper, Typography, AppBar, Toolbar, Grid } from "@mui/material";
 import TodoForm from "./TodoForm";
-import { v4 as uuidv4 } from "uuid";
+import useTodoState from "./hooks/useTodoState";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -15,33 +15,13 @@ const Item = styled(Paper)(({ theme }) => ({
 
 export default function Todo() {
   const initialTodos = JSON.parse(localStorage.getItem("todos"));
-  const [todos, setTodos] = useState(initialTodos || []);
+  const { todos, removeTodo, addTodo, toggleCompleted, editTodo } =
+    useTodoState(initialTodos);
 
   useEffect(() => {
     window.localStorage.setItem("todos", JSON.stringify(todos));
   }, [todos]);
 
-  const removeTodo = (id) => {
-    setTodos(todos.filter((todo) => todo.id !== id));
-  };
-
-  const editTodo = (id, updatedTask) => {
-    const updatedTodos = todos.map((todo) =>
-      todo.id === id ? { ...todo, task: updatedTask, completed: false } : todo
-    );
-    setTodos(updatedTodos);
-  };
-
-  const toggleCompleted = (id) => {
-    const updatedTodos = todos.map((todo) =>
-      todo.id === id ? { ...todo, completed: !todo.completed } : todo
-    );
-    setTodos(updatedTodos);
-  };
-
-  const addTodo = (newTodoText) => {
-    setTodos([...todos, { id: uuidv4(), task: newTodoText, completed: false }]);
-  };
   return (
     <Paper
       style={{
