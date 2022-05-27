@@ -24,7 +24,12 @@ export default function Todo() {
     setTodos(todos.filter((todo) => todo.id !== id));
   };
 
-  const editTodo = (id) => {};
+  const editTodo = (id, updatedTask) => {
+    const updatedTodos = todos.map((todo) =>
+      todo.id === id ? { ...todo, task: updatedTask } : todo
+    );
+    setTodos(updatedTodos);
+  };
 
   const toggleCompleted = (id) => {
     const updatedTodos = todos.map((todo) =>
@@ -65,6 +70,7 @@ export default function Todo() {
               todos={todos}
               removeTodo={removeTodo}
               toggleCompleted={toggleCompleted}
+              handleEdit={editTodo}
             />
           </Item>
         </Grid>

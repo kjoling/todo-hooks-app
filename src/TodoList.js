@@ -2,9 +2,12 @@ import React from "react";
 import TodoItem from "./TodoItem";
 import { Grid, List, Divider } from "@mui/material";
 
-export default function TodoList(props) {
-  const { todos, removeTodo, toggleCompleted } = props;
-
+export default function TodoList({
+  todos,
+  removeTodo,
+  toggleCompleted,
+  handleEdit,
+}) {
   const todoItems = todos.map((todo) => (
     <Grid item key={todo.id}>
       <TodoItem
@@ -12,6 +15,7 @@ export default function TodoList(props) {
         completed={todo.completed}
         removeTodo={removeTodo}
         toggleCompleted={toggleCompleted}
+        handleEdit={handleEdit}
       />
       <Divider />
     </Grid>
