@@ -1,24 +1,15 @@
 import React from "react";
-import TodoForm from "./TodoForm";
 import TodoItem from "./TodoItem";
-import { Paper, List, ListItem, ListItemText, Divider } from "@mui/material";
+import { Grid, List, Divider } from "@mui/material";
 
 export default function TodoList(props) {
-  const { todos, setTodos } = props;
+  const { todos } = props;
 
   const todoItems = todos.map((todo) => (
-    <>
-      <ListItem>
-        <ListItemText>
-          <TodoItem todo={todo} />
-        </ListItemText>
-      </ListItem>
+    <Grid item key={todo.id}>
+      <TodoItem todo={todo} complete={todo.completed} />
       <Divider />
-    </>
+    </Grid>
   ));
-  return (
-    <Paper>
-      <List>{todoItems}</List>
-    </Paper>
-  );
+  return <List>{todoItems}</List>;
 }
