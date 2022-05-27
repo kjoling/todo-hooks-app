@@ -28,6 +28,7 @@ export default function TodoForm(props) {
           maxRows={4}
           multiline
           autoFocus
+          variant="standard"
         />
       </form>
     </Paper>

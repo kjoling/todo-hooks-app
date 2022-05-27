@@ -67,14 +67,16 @@ export default function Todo() {
           <Item>
             <TodoForm addTodo={addTodo} />
           </Item>
-          <Item>
-            <TodoList
-              todos={todos}
-              removeTodo={removeTodo}
-              toggleCompleted={toggleCompleted}
-              handleEdit={editTodo}
-            />
-          </Item>
+          {todos.length > 0 && (
+            <Item>
+              <TodoList
+                todos={todos}
+                removeTodo={removeTodo}
+                toggleCompleted={toggleCompleted}
+                handleEdit={editTodo}
+              />
+            </Item>
+          )}
         </Grid>
       </Grid>
     </Paper>

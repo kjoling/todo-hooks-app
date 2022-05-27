@@ -20,5 +20,5 @@ export default function TodoList({
       {i < todos.length - 1 && <Divider />}
     </Grid>
   ));
-  return <List>{todoItems}</List>;
+  if (todos.length > 0) return <List>{todoItems}</List>;
 }
