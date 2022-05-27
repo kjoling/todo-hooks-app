@@ -26,7 +26,7 @@ export default function Todo() {
 
   const editTodo = (id, updatedTask) => {
     const updatedTodos = todos.map((todo) =>
-      todo.id === id ? { ...todo, task: updatedTask } : todo
+      todo.id === id ? { ...todo, task: updatedTask, completed: false } : todo
     );
     setTodos(updatedTodos);
   };

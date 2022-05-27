@@ -5,12 +5,11 @@ import {
   Checkbox,
   ListItemSecondaryAction,
   IconButton,
-  TextField,
 } from "@mui/material";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import useToggle from "./hooks/useToggle";
-import useInputState from "./hooks/useInputState";
+import EditTodoForm from "./EditTodoForm";
 
 export default function TodoItem({
   todo,
@@ -19,28 +18,14 @@ export default function TodoItem({
   handleEdit,
 }) {
   const [showForm, handleShowForm] = useToggle(false);
-  const [value, handleValueChange, reset] = useInputState("");
-
   return (
     <ListItem>
       {showForm ? (
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            handleEdit(todo.id, value);
-            reset();
-            handleShowForm();
-          }}
-        >
-          <TextField
-            value={value}
-            onChange={(e) => handleValueChange(e)}
-            margin="auto"
-            label="Edit new todo"
-            fullWidth
-            required
-          />
-        </form>
+        <EditTodoForm
+          handleEdit={handleEdit}
+          todo={todo}
+          handleShowForm={handleShowForm}
+        />
       ) : (
         <>
           <Checkbox
@@ -61,17 +46,16 @@ export default function TodoItem({
           >
             {todo.task}
           </ListItemText>
+          <ListItemSecondaryAction>
+            <IconButton aria-label="Delete" onClick={() => removeTodo(todo.id)}>
+              <DeleteForeverIcon />
+            </IconButton>
+            <IconButton aria-label="Edit" onClick={() => handleShowForm()}>
+              <ModeEditIcon />
+            </IconButton>
+          </ListItemSecondaryAction>
         </>
       )}
-
-      <ListItemSecondaryAction>
-        <IconButton aria-label="Delete" onClick={() => removeTodo(todo.id)}>
-          <DeleteForeverIcon />
-        </IconButton>
-        <IconButton aria-label="Edit" onClick={() => handleShowForm()}>
-          <ModeEditIcon />
-        </IconButton>
-      </ListItemSecondaryAction>
     </ListItem>
   );
 }
