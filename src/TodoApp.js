@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import TodoList from "./TodoList";
 import { styled } from "@mui/material/styles";
 import { Paper, Typography, AppBar, Toolbar, Grid } from "@mui/material";
@@ -17,10 +17,6 @@ export default function Todo() {
   const initialTodos = JSON.parse(localStorage.getItem("todos"));
   const { todos, removeTodo, addTodo, toggleCompleted, editTodo } =
     useTodoState(initialTodos);
-
-  useEffect(() => {
-    window.localStorage.setItem("todos", JSON.stringify(todos));
-  }, [todos]);
 
   return (
     <Paper
