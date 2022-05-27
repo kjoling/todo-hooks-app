@@ -9,23 +9,32 @@ import {
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 
-export default function TodoItem(props) {
-  const { todo, removeTodo } = props;
-
-  const handleDelete = (id) => {
-    removeTodo(id);
-  };
+export default function TodoItem({ todo, removeTodo, toggleCompleted }) {
   return (
     <ListItem>
-      <Checkbox tabIndex={-1} checked={todo.completed} />
-      <ListItemText style={{ wordBreak: "break-all", width: "80% " }}>
+      <Checkbox
+        tabIndex={-1}
+        checked={todo.completed}
+        onClick={() => toggleCompleted(todo.id)}
+      />
+      <ListItemText
+        style={{
+          wordBreak: "break-all",
+          textDecoration: todo.completed ? "line-through" : "none",
+        }}
+        sx={{
+          "& .MuiTypography-root": {
+            width: "85%",
+          },
+        }}
+      >
         {todo.task}
       </ListItemText>
       <ListItemSecondaryAction>
-        <IconButton onClick={() => handleDelete(todo.id)}>
+        <IconButton aria-label="Delete" onClick={() => removeTodo(todo.id)}>
           <DeleteForeverIcon />
         </IconButton>
-        <IconButton>
+        <IconButton aria-label="Edit">
           <ModeEditIcon />
         </IconButton>
       </ListItemSecondaryAction>

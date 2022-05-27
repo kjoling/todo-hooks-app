@@ -26,6 +26,13 @@ export default function Todo() {
 
   const editTodo = (id) => {};
 
+  const toggleCompleted = (id) => {
+    const updatedTodos = todos.map((todo) =>
+      todo.id === id ? { ...todo, completed: !todo.completed } : todo
+    );
+    setTodos(updatedTodos);
+  };
+
   const addTodo = (newTodoText) => {
     setTodos([...todos, { id: uuidv4(), task: newTodoText, completed: false }]);
   };
@@ -54,7 +61,11 @@ export default function Todo() {
         <Grid item xs={2} sm={4} md={4} style={{ marginTop: "1rem" }}>
           <Item>
             <TodoForm addTodo={addTodo} />
-            <TodoList todos={todos} removeTodo={removeTodo} />
+            <TodoList
+              todos={todos}
+              removeTodo={removeTodo}
+              toggleCompleted={toggleCompleted}
+            />
           </Item>
         </Grid>
       </Grid>
