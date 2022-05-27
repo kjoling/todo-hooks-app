@@ -1,6 +1,7 @@
 import React from "react";
 import { Paper, TextField } from "@mui/material";
 import useInputState from "./hooks/useInputState";
+import { autofocus } from "./hooks/helpers";
 
 export default function TodoForm(props) {
   const { addTodo } = props;
@@ -26,6 +27,7 @@ export default function TodoForm(props) {
           minRows={1}
           maxRows={4}
           multiline
+          autoFocus
         />
       </form>
     </Paper>

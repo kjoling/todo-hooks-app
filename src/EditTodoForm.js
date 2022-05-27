@@ -3,6 +3,7 @@ import useInputState from "./hooks/useInputState";
 import { TextField, ListItemSecondaryAction } from "@mui/material";
 import { IconButton } from "@mui/material";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
+import { autofocus } from "./hooks/helpers";
 
 export default function EditTodoForm({ todo, handleEdit, handleShowForm }) {
   const [value, handleValueChange] = useInputState(todo.task);
@@ -17,7 +18,7 @@ export default function EditTodoForm({ todo, handleEdit, handleShowForm }) {
             handleShowForm();
           }
         }}
-        style={{ width: "90%" }}
+        style={{ width: "85%", marginLeft: "1rem" }}
       >
         <TextField
           value={value}
@@ -29,6 +30,9 @@ export default function EditTodoForm({ todo, handleEdit, handleShowForm }) {
           multiline
           minRows={1}
           maxRows={2}
+          autoFocus
+          onFocus={autofocus}
+          variant="standard"
         />
       </form>
       <ListItemSecondaryAction>

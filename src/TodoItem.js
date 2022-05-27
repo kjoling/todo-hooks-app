@@ -19,7 +19,7 @@ export default function TodoItem({
 }) {
   const [showForm, handleShowForm] = useToggle(false);
   return (
-    <ListItem>
+    <ListItem style={{ height: "64px" }}>
       {showForm ? (
         <EditTodoForm
           handleEdit={handleEdit}
