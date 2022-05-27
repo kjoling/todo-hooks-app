@@ -64,9 +64,7 @@ export default function Todo() {
         style={{ justifyContent: "center", justifyItems: "center" }}
       >
         <Grid item xs={2} sm={4} md={4} style={{ marginTop: "1rem" }}>
-          <Item>
-            <TodoForm addTodo={addTodo} />
-          </Item>
+          <TodoForm addTodo={addTodo} />
           {todos.length > 0 && (
             <Item>
               <TodoList

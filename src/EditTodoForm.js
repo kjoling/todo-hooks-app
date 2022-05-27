@@ -27,9 +27,9 @@ export default function EditTodoForm({ todo, handleEdit, handleShowForm }) {
           label="Edit new todo"
           fullWidth
           required
-          multiline
-          minRows={1}
-          maxRows={2}
+          //   multiline
+          //   minRows={1}
+          //   maxRows={2} //still getting too many rerenders
           autoFocus
           onFocus={autofocus}
           variant="standard"
