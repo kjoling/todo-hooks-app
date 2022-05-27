@@ -20,6 +20,7 @@ export default function TodoForm(props) {
           margin="normal"
           label="Add new todo"
           fullWidth
+          required
         />
       </form>
     </Paper>

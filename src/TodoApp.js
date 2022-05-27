@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import TodoList from "./TodoList";
 import { styled } from "@mui/material/styles";
-import { Paper, Typography, AppBar, Toolbar, Grid, Box } from "@mui/material";
+import { Paper, Typography, AppBar, Toolbar, Grid } from "@mui/material";
 import TodoForm from "./TodoForm";
 import { v4 as uuidv4 } from "uuid";
 
@@ -19,6 +19,12 @@ export default function Todo() {
     { id: 2, task: "brush computer", completed: true },
   ];
   const [todos, setTodos] = useState(initialTodos);
+
+  const removeTodo = (id) => {
+    setTodos(todos.filter((todo) => todo.id !== id));
+  };
+
+  const editTodo = (id) => {};
 
   const addTodo = (newTodoText) => {
     setTodos([...todos, { id: uuidv4(), task: newTodoText, completed: false }]);
@@ -41,14 +47,14 @@ export default function Todo() {
       <Grid
         container
         spacing={{ xs: 2, md: 3 }}
-        columns={{ xs: 4, sm: 8, md: 12 }}
+        columns={{ xs: 4, sm: 6, md: 8 }}
         style={{ justifyContent: "center", justifyItems: "center" }}
         wrap="nowrap"
       >
         <Grid item xs={2} sm={4} md={4} style={{ marginTop: "1rem" }}>
           <Item>
             <TodoForm addTodo={addTodo} />
-            <TodoList todos={todos} />
+            <TodoList todos={todos} removeTodo={removeTodo} />
           </Item>
         </Grid>
       </Grid>

@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  Typography,
   ListItem,
   ListItemText,
   Checkbox,
@@ -11,7 +10,11 @@ import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 
 export default function TodoItem(props) {
-  const { todo } = props;
+  const { todo, removeTodo } = props;
+
+  const handleDelete = (id) => {
+    removeTodo(id);
+  };
   return (
     <ListItem>
       <Checkbox tabIndex={-1} checked={todo.completed} />
@@ -19,7 +22,7 @@ export default function TodoItem(props) {
         {todo.task}
       </ListItemText>
       <ListItemSecondaryAction>
-        <IconButton>
+        <IconButton onClick={() => handleDelete(todo.id)}>
           <DeleteForeverIcon />
         </IconButton>
         <IconButton>
