@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   ListItem,
   ListItemText,
@@ -37,6 +37,7 @@ export default function TodoItem({
             style={{
               wordBreak: "break-all",
               textDecoration: todo.completed ? "line-through" : "none",
+              fontStyle: todo.completed ? "italic" : "normal",
             }}
             sx={{
               "& .MuiTypography-root": {

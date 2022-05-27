@@ -8,10 +8,12 @@ export default function TodoForm(props) {
   return (
     <Paper style={{ margin: "1rem 0 ", padding: "0 1rem" }}>
       <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          addTodo(value);
-          reset();
+        onKeyDown={(e) => {
+          if (e.key === "Enter" && !e.shiftKey) {
+            e.preventDefault();
+            addTodo(value);
+            reset();
+          }
         }}
       >
         <TextField
@@ -21,6 +23,9 @@ export default function TodoForm(props) {
           label="Add new todo"
           fullWidth
           required
+          minRows={1}
+          maxRows={4}
+          multiline
         />
       </form>
     </Paper>
