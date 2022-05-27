@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import TodoList from "./TodoList";
 import { styled } from "@mui/material/styles";
 import { Paper, Typography, AppBar, Toolbar, Grid } from "@mui/material";
@@ -14,11 +14,12 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 export default function Todo() {
-  const initialTodos = [
-    { id: 1, task: "clean cat", completed: false },
-    { id: 2, task: "brush computer", completed: true },
-  ];
-  const [todos, setTodos] = useState(initialTodos);
+  const initialTodos = JSON.parse(localStorage.getItem("todos"));
+  const [todos, setTodos] = useState(initialTodos || []);
+
+  useEffect(() => {
+    window.localStorage.setItem("todos", JSON.stringify(todos));
+  }, [todos]);
 
   const removeTodo = (id) => {
     setTodos(todos.filter((todo) => todo.id !== id));
@@ -44,8 +45,8 @@ export default function Todo() {
   return (
     <Paper
       style={{
-        padding: 0,
-        margin: 0,
+        padding: "0",
+        margin: "0",
         height: "100vh",
         backgroundColor: "#fafafa",
       }}
@@ -61,11 +62,12 @@ export default function Todo() {
         spacing={{ xs: 2, md: 3 }}
         columns={{ xs: 4, sm: 6, md: 8 }}
         style={{ justifyContent: "center", justifyItems: "center" }}
-        wrap="nowrap"
       >
         <Grid item xs={2} sm={4} md={4} style={{ marginTop: "1rem" }}>
           <Item>
             <TodoForm addTodo={addTodo} />
+          </Item>
+          <Item>
             <TodoList
               todos={todos}
               removeTodo={removeTodo}

@@ -8,7 +8,7 @@ export default function TodoList({
   toggleCompleted,
   handleEdit,
 }) {
-  const todoItems = todos.map((todo) => (
+  const todoItems = todos.map((todo, i) => (
     <Grid item key={todo.id}>
       <TodoItem
         todo={todo}
@@ -17,7 +17,7 @@ export default function TodoList({
         toggleCompleted={toggleCompleted}
         handleEdit={handleEdit}
       />
-      <Divider />
+      {i < todos.length - 1 && <Divider />}
     </Grid>
   ));
   return <List>{todoItems}</List>;
