@@ -5,6 +5,9 @@ export default (initialTodos) => {
   const [todos, setTodos] = useLocalStorageState("todos", initialTodos || []);
 
   const addTodo = (newTodoText) => {
+    if (newTodoText === "") {
+      return;
+    }
     setTodos([...todos, { id: uuidv4(), task: newTodoText, completed: false }]);
   };
 
